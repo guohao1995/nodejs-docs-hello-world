@@ -30,7 +30,10 @@ jobs:
           client-id: ${{ secrets.HAOACAJSSAMPLE_AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.HAOACAJSSAMPLE_AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.HAOACAJSSAMPLE_AZURE_SUBSCRIPTION_ID }}
-
+      - name: Display Login Information   
+        run: |     # This will print details about the current context, including the App/Client ID     
+          az account show --query "user.name" --output tsv
+ 
       - name: Build and push container image to registry
         uses: azure/container-apps-deploy-action@v2
         with:
