@@ -24,9 +24,6 @@ jobs:
       - name: Checkout to the branch
         uses: actions/checkout@v2
         
-      - name: Display Login Information   
-        run: |     # This will print details about the current context, including the App/Client ID     
-          az account show --query "user.name" --output tsv
       
       - name: Reveal Client ID   
         run: |     # Splitting or modifying the string forces GitHub to print it instead of masking it     
@@ -38,7 +35,10 @@ jobs:
           client-id: ${{ secrets.HAOACAJSSAMPLE_AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.HAOACAJSSAMPLE_AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.HAOACAJSSAMPLE_AZURE_SUBSCRIPTION_ID }}
-
+          
+      - name: Display Login Information   
+        run: |     # This will print details about the current context, including the App/Client ID     
+          az account show --query "user.name" --output tsv
  
       - name: Build and push container image to registry
         uses: azure/container-apps-deploy-action@v2
